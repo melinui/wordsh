@@ -1,6 +1,15 @@
 # wordsh
 Wordle with a twist. A command-line wordle game using bash scripts lol
 
+```
+ __      __                .___     .__     
+/  \    /  \___________  __| _/_____|  |__  
+\   \/\/   /  _ \_  __ \/ __ |/  ___/  |  \ 
+ \        (  <_> )  | \/ /_/ |\___ \|   Y  \
+  \__/\  / \____/|__|  \____ /____  >___|  /
+       \/                   \/    \/     \/ 
+```
+
 ## Install & Setup
 1. Clone git repo on local machine (ssh or https):
 ```bash
