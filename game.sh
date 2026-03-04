@@ -31,30 +31,34 @@ while [ "$(expr length $guess)" -ne 5 ]; do
     read guess
 done
 
-for nt in 1 2 3 4 5 6; do
+LIMIT=6 # num of tries
+try=1   # start from 1st try of course
+
+while [ "$try" -le "$LIMIT" ]; do
+    # print the letter in boxes type format
     echo "-----------"
     echo "|$(expr substr "$guess" 1 1)|$(expr substr "$guess" 2 1)|$(expr substr "$guess" 3 1)|$(expr substr "$guess" 4 1)|$(expr substr "$guess" 5 1)|"
     echo -n "|"
     for i in 1 2 3 4 5; do
-        # get chars
+        # get chars of each word
         charw=`expr substr "$word" "$i" 1`
         charg=`expr substr "$guess" "$i" 1`
         
-        if [ "$word" = "$guess" ]; then
+        if [ "$word" = "$guess" ]; then # word found
             echo "o|o|o|o|o|"
             echo "-----------"
             echo "You won! You found the hidden word!"
             exit 0
-        elif [ "$charw" = "$charg" ]; then
+        elif [ "$charw" = "$charg" ]; then # char was found in the right place
             echo -n "o|"
-        elif [ "$(expr index "$word" "$charg")" -ne 0 ]; then
+        elif [ "$(expr index "$word" "$charg")" -ne 0 ]; then # char was found in word
             echo -n  "x|"
-        else
+        else # char does not exist in word
             echo -n "-|"
         fi
     done
     echo ; echo "-----------"
-    echo "Try another word:"
+    echo "Try another word:  -$(($LIMIT - $try)) tries left-"
     read guess
     # Check length of guess
     while [ "$(expr length $guess)" -ne 5 ]; do
@@ -62,6 +66,7 @@ for nt in 1 2 3 4 5 6; do
         echo -n "Try again: "
         read guess
     done
+    try=$(($try + 1))
 done
 echo
 echo "You lost! Out of tries!"
