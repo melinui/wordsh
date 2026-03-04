@@ -25,10 +25,11 @@ echo "Give your guess bellow:"
 read guess
 
 # Check length of guess
-if [ "$(expr length $guess)" -ne 5 ]; then
+while [ "$(expr length $guess)" -ne 5 ]; do
     echo "Guess must be exactly 5 letters!"
-    exit 1
-fi
+    echo -n "Try again: "
+    read guess
+done
 
 for nt in 1 2 3 4 5 6; do
     echo "-----------"
@@ -56,10 +57,11 @@ for nt in 1 2 3 4 5 6; do
     echo "Try another word:"
     read guess
     # Check length of guess
-    if [ "$(expr length $guess)" -ne 5 ]; then
+    while [ "$(expr length $guess)" -ne 5 ]; do
         echo "Guess must be exactly 5 letters!"
-        exit 1
-    fi
+        echo -n "Try again: "
+        read guess
+    done
 done
 echo
 echo "You lost! Out of tries!"
