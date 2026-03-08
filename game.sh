@@ -58,10 +58,15 @@ while [ "$try" -le "$LIMIT" ]; do
         fi
     done
     echo ; echo "-----------"
-    echo "Try another word:  -$(($LIMIT - $try)) tries left-"
-    read guess
+    
+    # ask for another guess, unless out of tries
+    if [ "$(($LIMIT - $try))" -ne 0 ]; then
+        echo "Try another word:  -$(($LIMIT - $try)) tries left-"
+        read guess
+    fi
+
     # Check length of guess
-    while [ "$(expr length $guess)" -ne 5 ]; do
+    while [ "$(expr length $guess)" -ne 5 ] && [ "$(($LIMIT - $try))" -ne 0 ]; do
         echo "Guess must be exactly 5 letters!"
         echo -n "Try again: "
         read guess
